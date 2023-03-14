@@ -93,4 +93,8 @@ contract VRFV2Consumer is VRFConsumerBaseV2, Ownable {
     function setRequestConfirmations(uint16 _requestConfirmations) external onlyOwner {
         requestConfirmations = _requestConfirmations;
     }
+
+    function setSubscriptionId(uint64 _s_subscriptionId) external onlyOwner {
+        s_subscriptionId = _s_subscriptionId;
+    }
 }
