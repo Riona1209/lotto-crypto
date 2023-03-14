@@ -1,26 +1,22 @@
-import { adminsWallets } from "@/constants";
 import { useEthersStore } from "@/store/ethersStore";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
-  const { currentWallet } = useEthersStore();
+  const { currentWallet, isOwner } = useEthersStore();
   const router = useRouter();
   const isBrowser = typeof window !== "undefined";
 
   useEffect(() => {
-    if (!currentWallet || !adminsWallets.includes(currentWallet)) {
+    if (!currentWallet || !isOwner) {
       router.push("/");
     }
-  }, [currentWallet]);
+  }, [currentWallet, isOwner]);
 
   return (
     <>
       {!isBrowser && null}
-      {isBrowser &&
-        currentWallet &&
-        adminsWallets.includes(currentWallet) &&
-        children}
+      {isBrowser && currentWallet && isOwner && children}
     </>
   );
 };

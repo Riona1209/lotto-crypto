@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { rightChainId } from "@/constants";
 import { useEthers } from "@/hooks/useEthers";
 import { useInfiniteScrollStore } from "@/store/infiniteScrollStore";
+import { useAdmin } from "@/hooks/useAdmin";
 
 type LottoContextType = {
   buyTicket: () => Promise<void>;
@@ -17,6 +18,7 @@ const LottoContext = createContext({} as LottoContextType);
 export const useLotto = () => useContext(LottoContext);
 
 const LottoProvider = ({ children }: { children: any }) => {
+  const { getOwner } = useAdmin();
   const chainId = useEthersStore((state) => state.chainId);
   const currentWallet = useEthersStore((state) => state.currentWallet);
   const addLastRound = useEthersStore((state) => state.addLastRound);
@@ -56,6 +58,7 @@ const LottoProvider = ({ children }: { children: any }) => {
       }
     }
     refresh();
+    getOwner();
     refresherRef.current = refreshInterval();
     return () => {
       clearInterval(refresherRef.current);

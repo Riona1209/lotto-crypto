@@ -18,9 +18,11 @@ type EthersStore = {
   lastRounds: any[];
   error: string | null;
   lottoContract: any;
+  isOwner: boolean;
   connectWallet: () => Promise<any>;
   disconnectWallet: () => void;
   addLastRound: (ticket: any) => void;
+  setIsOwner: (isOwner: boolean) => void;
 };
 
 export const useEthersStore = create<EthersStore>()(
@@ -34,6 +36,7 @@ export const useEthersStore = create<EthersStore>()(
     tickets: [],
     error: null,
     lottoContract: null,
+    isOwner: false,
     connectWallet: async () => {
       try {
         const wallet = await AuthServices.connect(get().provider!);
@@ -48,6 +51,9 @@ export const useEthersStore = create<EthersStore>()(
     },
     addLastRound: (lastRound: any) => {
       set((state) => ({ lastRounds: [lastRound, ...state.lastRounds] }));
+    },
+    setIsOwner: (isOwner: boolean) => {
+      set({ isOwner: isOwner });
     },
   }))
 );

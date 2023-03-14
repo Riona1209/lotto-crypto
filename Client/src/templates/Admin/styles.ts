@@ -34,6 +34,8 @@ export const Input = styled.input`
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   background: rgba(83, 83, 83, 0.29);
+  color: white;
+  outline: none;
 `;
 
 export const Button = styled.button`

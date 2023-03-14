@@ -14,6 +14,7 @@ const Header = ({}: HeaderProps) => {
   const currentWallet = useEthersStore((state) => state.currentWallet);
   const provider = useEthersStore((state) => state.provider);
   const chainId = useEthersStore((state) => state.chainId);
+  const isOwner = useEthersStore((state) => state.isOwner);
 
   return (
     <S.Container layout>
@@ -25,7 +26,7 @@ const Header = ({}: HeaderProps) => {
           change network to Mumbai
         </Button>
       )}
-      {currentWallet && adminsWallets.includes(currentWallet) && (
+      {currentWallet && isOwner && (
         <S.LinkStyled href="/admin">Admin Panel</S.LinkStyled>
       )}
 
