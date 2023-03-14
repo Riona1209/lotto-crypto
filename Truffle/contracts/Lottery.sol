@@ -110,7 +110,7 @@ contract Lottery is
         fee = _fee;
         lotteryName = _name;
         configFinishTime = 10 minutes;
-        configTimeToClaim = 7 days;
+        configTimeToClaim = 10 minutes;
         ticketPrice = _ticketPrice;
         minTicket = _minTicket;
     }
@@ -204,7 +204,7 @@ contract Lottery is
             ];
             lottery[currentLottery].timeToClaim =
                 block.timestamp +
-                configFinishTime;
+                configTimeToClaim;
             require(resetLottery(), "Lottery needs to be reseted");
         }
     }
