@@ -38,7 +38,7 @@ const LastRounds = () => {
     <S.Container>
       <H2>Last Rounds</H2>
       <S.RoundsContainer>
-        {lastRounds.length > 1 &&
+        {lastRounds.length > 0 &&
           lastRounds?.map((round) => (
             <S.RoundContainer key={round.id}>
               <Ticket

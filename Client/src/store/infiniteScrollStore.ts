@@ -9,7 +9,7 @@ export type InfiniteScrollStore = {
 };
 
 export const useInfiniteScrollStore = create<InfiniteScrollStore>((set) => ({
-  step: 4,
+  step: 2,
   start: -1,
   end: -1,
   hasMoreRounds: false,

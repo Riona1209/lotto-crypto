@@ -21,7 +21,7 @@ const LottoProvider = ({ children }: { children: any }) => {
   const currentWallet = useEthersStore((state) => state.currentWallet);
   const addLastRound = useEthersStore((state) => state.addLastRound);
   const { provider, signer } = useEthers();
-  const lottoContractAddress = "0x72a20ce4c4eDa85aa88a34a3292a46689020A11b";
+  const lottoContractAddress = "0x98b305De076bb8518bfB238f0E393E40e3A2BBd0";
   const [lottoContract, setLottoContract] = useState<any>(null);
   const refresherRef = useRef<any>(null);
   const step = useInfiniteScrollStore((state) => state.step);
@@ -152,8 +152,10 @@ const LottoProvider = ({ children }: { children: any }) => {
       useInfiniteScrollStore.setState({ isLoadingMoreRounds: true });
       const currentLottoId = await lottoContract.lotteryId();
       const lastRounds = [];
+
       for (let i = 1; i < step + 1; i++) {
-        if (currentLottoId - i < 0) break;
+        if (currentLottoId.toNumber() - i < 0) break;
+
         const round = await lottoContract.getLotteryStatus(currentLottoId - i);
         lastRounds.push({ id: currentLottoId - i, ...round });
       }
