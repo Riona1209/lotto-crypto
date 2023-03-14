@@ -12,9 +12,9 @@ module.exports = async function (deployer, _network, accounts) {
 
     switch (_network) {
         case "matic": {
-            _subscriptionId = "2331";
-            _coordinatorId = "0xAE975071Be8F8eE67addBC1A82488F1C24858067";
-            _keyHash = "0x6e099d640cde6de9d40ac749b4b594126b0169747122711109c9985d47751f93";
+            _subscriptionId = "671";
+            _coordinatorId = "0xae975071be8f8ee67addbc1a82488f1c24858067";
+            _keyHash = "0xcc294a196eeeb44da2888d17c0625cc88d70d9760a69d58d853ba6581a9ab0cd";
             break;
         }
         case "mumbai": {
