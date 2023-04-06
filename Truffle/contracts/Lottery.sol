@@ -19,10 +19,15 @@ contract Lottery is
 {
     using Counters for Counters.Counter;
 
+    struct Ticket {
+        uint256 ticketId;
+        uint256 timestamp;
+    }
+
     struct User {
         bool hasTicket;
         bool claimed;
-        uint256[] tickets;
+        Ticket[] tickets;
     }
 
     struct LotteryStruct {
@@ -134,7 +139,7 @@ contract Lottery is
         ticketOwners[currentLottery][msg.sender].hasTicket = true;
         ticketOwners[currentLottery][msg.sender].claimed = false;
         ticketOwners[currentLottery][msg.sender].tickets.push(
-            currentLotteryPosition
+            Ticket(currentLotteryPosition, block.timestamp)
         );
 
         tickets[currentLottery][currentLotteryPosition] = msg.sender;
@@ -323,11 +328,6 @@ contract Lottery is
         address _user
     ) public view returns (User memory _returnedUser) {
         return ticketOwners[_lotteryId][_user];
-    }
-
-    // Only if we have some problem to use this
-    function getAllBalance() external onlyOwner {
-        payable(msg.sender).transfer(address(this).balance);
     }
 
     function checkUpkeep(

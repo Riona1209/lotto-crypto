@@ -53,7 +53,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nimport \"./AutomationBase.sol\";\nimport \"./interfaces/AutomationCompatibleInterface.sol\";\n\nabstract contract AutomationCompatible is AutomationBase, AutomationCompatibleInterface {}\n",
-  "sourcePath": "@chainlink/contracts/src/v0.8/AutomationCompatible.sol",
+  "sourcePath": "@chainlink\\contracts\\src\\v0.8\\AutomationCompatible.sol",
   "ast": {
     "absolutePath": "@chainlink/contracts/src/v0.8/AutomationCompatible.sol",
     "exportedSymbols": {
@@ -169,7 +169,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-03-14T18:45:00.717Z",
+  "updatedAt": "2023-04-06T20:18:25.273Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
