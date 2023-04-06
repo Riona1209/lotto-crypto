@@ -8,6 +8,7 @@ import NoTicket from "@/components/NoTicket";
 import { Pagination } from "@mui/material";
 import LottoInfo from "./components/LottoInfo";
 import Counter from "../../../../components/Counter";
+import { getDateFromTimestamp } from "@/functions/getDateFromTimestamp";
 
 const MyTickets = () => {
   const [currentTicket, setCurrentTicket] = useState(0);
@@ -31,8 +32,10 @@ const MyTickets = () => {
           {!tickets.length && <NoTicket />}
           {tickets.map((ticket, index) => (
             <Ticket
-              key={index}
-              id={ticket}
+              key={ticket.timestamp.toString() + ticket.ticketId.toString()}
+              id={`${getDateFromTimestamp(
+                ticket.timestamp.toString()
+              )}${ticket.ticketId.toString()}`}
               ticketsToSale={currentLottoInfo?.minTicket}
               finalized={currentLottoInfo?.finalized}
               ticketsCount={currentLottoInfo?.ticketsCount}

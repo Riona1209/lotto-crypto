@@ -23,7 +23,7 @@ const LottoProvider = ({ children }: { children: any }) => {
   const currentWallet = useEthersStore((state) => state.currentWallet);
   const addLastRound = useEthersStore((state) => state.addLastRound);
   const { provider, signer } = useEthers();
-  const lottoContractAddress = "0x98b305De076bb8518bfB238f0E393E40e3A2BBd0";
+  const lottoContractAddress = "0x856233A402d7609a392a4854b28a2a8E4E916b7c";
   const [lottoContract, setLottoContract] = useState<any>(null);
   const refresherRef = useRef<any>(null);
   const step = useInfiniteScrollStore((state) => state.step);
