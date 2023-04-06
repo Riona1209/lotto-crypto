@@ -105,6 +105,8 @@ contract Lottery is
         uint32 _minTicket,
         uint256 _fee
     ) VRFV2Consumer(_subscriptionId, _cordinatorAddress, _keyHash) {
+        // Start with LotteryId=1
+        lotteryId.increment();
         uint256 currentLottery = lotteryId.current();
 
         lottery[currentLottery].name = _name;
