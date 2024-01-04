@@ -29,6 +29,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 		skipIfAlreadyDeployed: true,
 	});
 
+	const blockNumber = await ethers.provider.getBlockNumber();
+
 	try {
 		if (hre.network.name != "hardhat" && hre.network.name != "testing" && hre.network.name != "localhost") {
 			const { stdout, stderr } = await exec(`npx hardhat verify --network ${hre.network.name} ${deployedContract.address} ${deployer.address} ${chainConfigs[network.name]._subscriptionId} ${chainConfigs[network.name]._coordinatorId} ${chainConfigs[network.name]._keyHash} "Lotto Crypto" ${chainConfigs[network.name]._ticketPrice} ${chainConfigs[network.name]._minTicket} ${chainConfigs[network.name]._fee} ${chainConfigs[network.name]._configFinishTime} ${chainConfigs[network.name]._configTimeToClaim}`);

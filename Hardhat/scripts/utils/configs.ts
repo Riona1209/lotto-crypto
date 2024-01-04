@@ -20,7 +20,7 @@ export const chainConfigs: IIndexable = {
         _keyHash: "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
         _ticketPrice: "100000000000000000", // 0,1 ETHER
         _minTicket: "5",
-        _fee: "5", // 5%
+        _fee: "10", // 10%
         _configFinishTime: "60",
         _configTimeToClaim: "60",
     },
@@ -30,7 +30,7 @@ export const chainConfigs: IIndexable = {
         _keyHash: "0x6e099d640cde6de9d40ac749b4b594126b0169747122711109c9985d47751f93",
         _ticketPrice: "1000000000000000000", // 1 ETHER
         _minTicket: "10",
-        _fee: "5", // 5%
+        _fee: "10", // 10%
         _configFinishTime: "86400",
         _configTimeToClaim: "86400",
     },
@@ -40,7 +40,7 @@ export const chainConfigs: IIndexable = {
         _keyHash: "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
         _ticketPrice: "100000000000000000", // 0,1 ETHER
         _minTicket: "5",
-        _fee: "5", // 5%
+        _fee: "10", // 10%
         _configFinishTime: "60",
         _configTimeToClaim: "60",
     },
@@ -50,7 +50,7 @@ export const chainConfigs: IIndexable = {
         _keyHash: "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
         _ticketPrice: "100000000000000000", // 0,1 ETHER
         _minTicket: "5",
-        _fee: "5", // 5%
+        _fee: "10", // 10%
         _configFinishTime: "60",
         _configTimeToClaim: "60",
     }
