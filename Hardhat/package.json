@@ -1,0 +1,32 @@
+{
+  "name": "lottocrypto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "npx hardhat deploy",
+    "polygonMumbai": "npx hardhat deploy --network polygonMumbai",
+    "polygon": "npx hardhat deploy --network polygon"
+  },
+  "keywords": [
+    "matic",
+    "polygon",
+    "lotto",
+    "crypto",
+    "gamefi"
+  ],
+  "author": "Lucas Ramos Archangelo",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.19.4",
+    "hardhat-deploy": "^0.11.37",
+    "hardhat-deploy-ethers": "^0.4.1"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.8.0",
+    "@openzeppelin/contracts": "^5.0.1"
+  }
+}
