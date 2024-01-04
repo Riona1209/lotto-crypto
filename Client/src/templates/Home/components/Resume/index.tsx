@@ -24,7 +24,7 @@ const Resume = () => {
         style={{ position: "relative", left: "-23px", top: "5px" }}
       />
       <S.TextResume>
-        <P>
+        <p>
           Welcome to our cryptocurrency lottery site! Here you have the chance
           to win big prizes by purchasing tickets with your favorite
           cryptocurrencies. We've made buying tickets simple and easy, with no
@@ -35,7 +35,7 @@ const Resume = () => {
           fast and secure cryptocurrency payments, you can receive your prize
           within minutes. So what are you waiting for? Buy your tickets now and
           start dreaming of the big cryptocurrency prize!
-        </P>
+        </p>
       </S.TextResume>
       <ActionButtons />
     </S.Container>

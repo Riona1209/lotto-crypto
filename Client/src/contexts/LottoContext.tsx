@@ -1,5 +1,5 @@
 import { useEthersStore } from "@/store/ethersStore";
-import LottoAbi from "../../contracts/Lottery.json";
+import LottoAbi from "../../deployments/polygonMumbai/Lottery.json";
 import { ethers } from "ethers";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { rightChainId } from "@/constants";
@@ -23,7 +23,7 @@ const LottoProvider = ({ children }: { children: any }) => {
   const currentWallet = useEthersStore((state) => state.currentWallet);
   const addLastRound = useEthersStore((state) => state.addLastRound);
   const { provider, signer } = useEthers();
-  const lottoContractAddress = "0x856233A402d7609a392a4854b28a2a8E4E916b7c";
+  const lottoContractAddress = LottoAbi.address;
   const [lottoContract, setLottoContract] = useState<any>(null);
   const refresherRef = useRef<any>(null);
   const step = useInfiniteScrollStore((state) => state.step);
@@ -110,6 +110,7 @@ const LottoProvider = ({ children }: { children: any }) => {
     try {
       useEthersStore.setState({ loading: true });
       const lastLottery = await getLastLottery();
+      console.log(lastLottery);
       const lotteryPrice = await lastLottery.ticketPrice;
 
       const tx = await lottoContract.buyTicket({
@@ -154,12 +155,17 @@ const LottoProvider = ({ children }: { children: any }) => {
       if (isLoadingMoreRounds) return;
       useInfiniteScrollStore.setState({ isLoadingMoreRounds: true });
       const currentLottoId = await lottoContract.lotteryId();
+      console.log(currentLottoId);
       const lastRounds = [];
 
       for (let i = 1; i < step + 1; i++) {
-        if (currentLottoId.toNumber() - i < 0) break;
+        // if (currentLottoId.toNumber() - i < 0) {
+        //   console.log("break");
+        //   break;
+        // }
 
         const round = await lottoContract.getLotteryStatus(currentLottoId - i);
+        console.log(round);
         lastRounds.push({ id: currentLottoId - i, ...round });
       }
 

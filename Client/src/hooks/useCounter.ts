@@ -28,6 +28,15 @@ export const useCounterGeneric = ({
     const startdTimeInNumber = startedTime.toNumber();
     const timeToFinishInNumber = timeToFinish.toNumber();
 
+    console.log("startdTimeInNumber", startdTimeInNumber);
+    console.log("timeToFinishInNumber", timeToFinishInNumber);
+
+    const timeToFinishInHuman = new Date(
+      timeToFinishInNumber * 1000
+    ).toLocaleString();
+
+    console.log("timeToFinishInHuman", timeToFinishInHuman);
+
     if (startdTimeInNumber == 0) return;
     if (timeToFinishInNumber == 0) return clearInterval(counterRef.current);
 
