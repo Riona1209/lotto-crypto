@@ -5,7 +5,6 @@ export const GlobalStyle = createGlobalStyle`
     @tailwind components;
     @tailwind utilities;
 
-
     * {
         margin: 0;
         padding: 0;
