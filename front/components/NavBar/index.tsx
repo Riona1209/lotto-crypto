@@ -1,6 +1,13 @@
 "use client";
 
-import { Check, ChevronsUpDown, LogOut } from "lucide-react";
+import {
+  Check,
+  ChevronsUpDown,
+  LogIn,
+  LogOut,
+  User,
+  Wallet,
+} from "lucide-react";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -14,6 +21,15 @@ import {
   CommandInput,
   CommandItem,
 } from "../ui/command";
+import { useAccount } from "@/contexts/AccountContext";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+  DialogTitle,
+  DialogDescription,
+} from "../ui/dialog";
 
 const versions = [
   {
@@ -27,9 +43,11 @@ const versions = [
 ];
 
 export const Navbar = () => {
-  const wallet = "0x56DFC05c1ec7759f065b10815949ee464D0f73B7";
+  const { address, logout, connectMetaMask } = useAccount();
 
-  const walletMini = `${wallet.slice(0, 6)}...${wallet.slice(-4)}`;
+  const walletMini = address
+    ? `${address.slice(0, 6)}...${address.slice(-4)}`
+    : "";
 
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(versions[0]?.value);
@@ -86,10 +104,53 @@ export const Navbar = () => {
           </Popover>
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-neutral-400">{walletMini}</span>
-          <Button size="icon" variant="ghost">
-            <LogOut></LogOut>
-          </Button>
+          {address && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="secondary">
+                  <User className="mr-1"></User>
+                  {walletMini}
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Profile</DialogTitle>
+                  <DialogDescription>
+                    Infos about your wallet in LottoCrypto.
+                  </DialogDescription>
+                </DialogHeader>
+
+                <Separator />
+
+                <div className="flex items-center justify-end p-2">
+                  <Button variant="secondary" onClick={() => logout()}>
+                    Disconnect
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
+
+          <Separator orientation="vertical" className="h-6" />
+          {address ? (
+            <Button size="icon" variant="ghost">
+              <LogOut
+                className="h-4 w-4"
+                onClick={() => {
+                  logout();
+                }}
+              ></LogOut>
+            </Button>
+          ) : (
+            <Button size="icon" variant="ghost">
+              <LogIn
+                className="h-4 w-4"
+                onClick={() => {
+                  connectMetaMask();
+                }}
+              ></LogIn>
+            </Button>
+          )}
         </div>
       </nav>
       <Separator />

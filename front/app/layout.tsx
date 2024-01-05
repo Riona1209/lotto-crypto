@@ -11,6 +11,8 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/NavBar";
+import { Providers } from "./providers";
+import { Footer } from "@/components/Footer";
 
 export default function RootLayout({ children }: any) {
   return (
@@ -18,15 +20,18 @@ export default function RootLayout({ children }: any) {
       <html lang="en" suppressHydrationWarning>
         <head></head>
         <body>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <div className="container mx-auto min-h-screen">{children}</div>
-          </ThemeProvider>
+          <Providers>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar />
+              <div className="container mx-auto min-h-screen">{children}</div>
+              <Footer />
+            </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>

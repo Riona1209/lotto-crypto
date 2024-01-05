@@ -27,6 +27,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAccount } from "@/contexts/AccountContext";
 import {
   BarChart2,
   Car,
@@ -38,6 +39,8 @@ import {
 } from "lucide-react";
 
 export const Home = () => {
+  const { connectMetaMask, address } = useAccount();
+
   return (
     <div
       style={{
@@ -136,9 +139,15 @@ export const Home = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <Button variant="outline">Login</Button>
-          <Button>Buy Ticket!</Button>
+        <div className="grid grid-cols-2 gap-4">
+          <Button
+            disabled={address ? true : false}
+            onClick={() => connectMetaMask()}
+            variant="outline"
+          >
+            {address ? "Connected!" : "Connect wallet"}
+          </Button>
+          <Button disabled={address ? false : true}>Buy Ticket!</Button>
         </div>
       </div>
       <div className="flex flex-col items-center gap-2 justify-center">
