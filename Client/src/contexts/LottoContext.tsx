@@ -159,10 +159,10 @@ const LottoProvider = ({ children }: { children: any }) => {
       const lastRounds = [];
 
       for (let i = 1; i < step + 1; i++) {
-        // if (currentLottoId.toNumber() - i < 0) {
-        //   console.log("break");
-        //   break;
-        // }
+        if (currentLottoId.toNumber() - i < 0) {
+          console.log("break");
+          break;
+        }
 
         const round = await lottoContract.getLotteryStatus(currentLottoId - i);
         console.log(round);

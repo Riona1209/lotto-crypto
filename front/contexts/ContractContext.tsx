@@ -6,6 +6,9 @@ import { useAccount } from "./AccountContext";
 
 type ContractContextType = {
   buyTicket: () => Promise<void>;
+  lastLottery: any;
+  lastRounds: any;
+  claim: (loteryId: number | string) => Promise<void>;
 };
 
 const ContractContext = createContext({} as ContractContextType);
@@ -15,6 +18,7 @@ export const useContract = () => useContext(ContractContext);
 export default function ContractProvider({ children }: any) {
   const { setAccountData, address, accountData } = useAccount();
   const [lastLottery, setLastLottery] = useState<any>(null);
+  const [lastRounds, setLastRounds] = useState<any>([]);
   const refreshInterval = useRef<any>(null);
 
   useEffect(() => {
@@ -26,6 +30,7 @@ export default function ContractProvider({ children }: any) {
   useEffect(() => {
     if (!address) return;
     refresh();
+    getLastRounds();
   }, [address]);
 
   const getProvider = () => {
@@ -53,9 +58,9 @@ export default function ContractProvider({ children }: any) {
   };
 
   const updateLastLotteryInfo = async () => {
-    const lastLottery = await getLastLottery();
+    const lastLottery = (await getLastLottery()).toObject();
 
-    console.log(lastLottery.toObject());
+    setLastLottery(lastLottery);
   };
 
   const buyTicket = async () => {
@@ -113,6 +118,39 @@ export default function ContractProvider({ children }: any) {
     }
   };
 
+  const getLastRounds = async () => {
+    try {
+      const lottoContract = await getContract();
+
+      const currentLottoId = await lottoContract.lotteryId();
+      console.log(currentLottoId);
+
+      const lastRounds = [];
+
+      for (let i = 1; i < currentLottoId; i++) {
+        const roundData = await lottoContract.getLotteryStatus(i);
+        const roundObject = roundData.toObject();
+        lastRounds.push({ ...roundObject, id: i });
+      }
+
+      setLastRounds(lastRounds);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const claim = async (loteryId: number | string) => {
+    try {
+      const lottoContract = await getContract();
+      const tx = await lottoContract.claim(loteryId);
+      const receipt = await tx.wait();
+      toast.success("Claimed successfully");
+      refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleError = (error: any) => {
     toast.error(error.message);
   };
@@ -121,6 +159,9 @@ export default function ContractProvider({ children }: any) {
     <ContractContext.Provider
       value={{
         buyTicket,
+        lastLottery,
+        lastRounds,
+        claim,
       }}
     >
       {children}

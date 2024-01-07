@@ -1,5 +1,6 @@
 "use client";
 
+import { AlertStatus } from "@/components/AlertStatus";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -40,6 +41,7 @@ import {
 } from "lucide-react";
 
 import moment from "moment";
+import { LottoHistory } from "./components/LottoHistory";
 
 export const Home = () => {
   const { connectMetaMask, address, accountData } = useAccount();
@@ -157,74 +159,7 @@ export const Home = () => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-2 justify-center">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="secondary" className="mb-4">
-              <TrendingUp className="mr-2" /> See lotto history.
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[600px]">
-            <DialogHeader>
-              <DialogTitle>Last lotto's</DialogTitle>
-              <DialogDescription>
-                Here you can see the last lotto's and their winners.
-              </DialogDescription>
-            </DialogHeader>
-
-            <div className="flex gap-4 flex-col">
-              <Card>
-                <CardHeader>
-                  <CardTitle>LottoTicket</CardTitle>
-                  <CardDescription>ID: 43322132</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-neutral-400">Price</span>
-                      <span className="text-neutral-400">0.1 MATIC</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-neutral-400">Status</span>
-                      <span className="text-neutral-400">Pending</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-neutral-400">Date</span>
-                      <span className="text-neutral-400">
-                        2021-08-11 12:00:00
-                      </span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Lotto Session</CardTitle>
-                  <CardDescription>ID: 43322132</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-neutral-400">Winner</span>
-                      <span className="text-neutral-400">
-                        0x56DF...eD0f73B7
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-neutral-400">Status</span>
-                      <span className="text-neutral-400">Finished</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-neutral-400">Date</span>
-                      <span className="text-neutral-400">
-                        2021-08-11 12:00:00
-                      </span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <LottoHistory />
 
         <Tabs className="h-1/2 w-3/4" defaultValue="lotteryStatus">
           <TabsList>
@@ -232,13 +167,7 @@ export const Home = () => {
             <TabsTrigger value="tickets">My tickets</TabsTrigger>
           </TabsList>
           <TabsContent className="flex flex-col gap-2" value="lotteryStatus">
-            <Alert className="mt-1">
-              <BarChart2 className="h-4 w-4" />
-              <AlertTitle>Status</AlertTitle>
-              <AlertDescription>
-                The lottery is currently open, buy your tickets now!
-              </AlertDescription>
-            </Alert>
+            <AlertStatus />
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Lotto Session</CardTitle>
