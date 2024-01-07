@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAccount } from "@/contexts/AccountContext";
+import { useContract } from "@/contexts/ContractContext";
 import {
   BarChart2,
   Car,
@@ -38,8 +39,11 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+import moment from "moment";
+
 export const Home = () => {
-  const { connectMetaMask, address } = useAccount();
+  const { connectMetaMask, address, accountData } = useAccount();
+  const { buyTicket } = useContract();
 
   return (
     <div
@@ -147,7 +151,9 @@ export const Home = () => {
           >
             {address ? "Connected!" : "Connect wallet"}
           </Button>
-          <Button disabled={address ? false : true}>Buy Ticket!</Button>
+          <Button disabled={address ? false : true} onClick={() => buyTicket()}>
+            Buy Ticket!
+          </Button>
         </div>
       </div>
       <div className="flex flex-col items-center gap-2 justify-center">
@@ -263,13 +269,15 @@ export const Home = () => {
           <TabsContent value="tickets">
             <Carousel className="w-full max-w-xl">
               <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index}>
+                {accountData?.tickets?.map((ticket: any) => (
+                  <CarouselItem key={ticket.ticketId}>
                     <div className="p-1">
                       <Card>
                         <CardHeader>
                           <CardTitle>LottoTicket</CardTitle>
-                          <CardDescription>ID: 43322132</CardDescription>
+                          <CardDescription>
+                            ID: {ticket.ticketId}
+                          </CardDescription>
                         </CardHeader>
                         <CardContent>
                           <div className="flex flex-col gap-2">
@@ -286,13 +294,19 @@ export const Home = () => {
                             <div className="flex items-center justify-between">
                               <span className="text-neutral-400">Date</span>
                               <span className="text-neutral-400">
-                                2021-08-11 12:00:00
+                                {moment(ticket.timestamp * 1000).format(
+                                  "YYYY-MM-DD HH:mm:ss"
+                                )}
                               </span>
                             </div>
                           </div>
                         </CardContent>
                         <CardFooter>
-                          <Button className="ml-auto mt-2" variant="outline">
+                          <Button
+                            onClick={() => buyTicket()}
+                            className="ml-auto mt-2"
+                            variant="outline"
+                          >
                             Buy another ticket!
                           </Button>
                         </CardFooter>

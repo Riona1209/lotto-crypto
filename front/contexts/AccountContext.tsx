@@ -11,6 +11,8 @@ type AccountContextProps = {
   address: string;
   connectMetaMask: () => void;
   logout: () => void;
+  accountData: any;
+  setAccountData: any;
 };
 
 const AccountContext = createContext({} as AccountContextProps);
@@ -25,6 +27,7 @@ export default function AccountProvider({
   children: React.ReactNode;
 }) {
   const [address, setAddress] = useState("");
+  const [accountData, setAccountData] = useState<any>();
 
   useEffect(() => {
     initAuthIfUserConnectedBefore();
@@ -40,6 +43,14 @@ export default function AccountProvider({
 
       setAddress(accounts[0]);
       toast.success("MetaMask connected successfully.");
+
+      window.ethereum.on("accountsChanged", (accounts: string[]) => {
+        if (accounts.length > 0) {
+          setAddress(accounts[0]);
+        } else {
+          setAddress("");
+        }
+      });
     } catch (error) {
       console.error(error);
     }
@@ -68,6 +79,8 @@ export default function AccountProvider({
         address,
         connectMetaMask,
         logout,
+        accountData,
+        setAccountData,
       }}
     >
       {children}
