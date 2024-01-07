@@ -18,11 +18,11 @@ export const chainConfigs: IIndexable = {
         _subscriptionId: "3262",
         _coordinatorId: "0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed",
         _keyHash: "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
-        _ticketPrice: "100000000000000000", // 0,1 ETHER
+        _ticketPrice: "10000000000000000", // 0,001 ETHER
         _minTicket: "5",
         _fee: "10", // 10%
-        _configFinishTime: "60",
-        _configTimeToClaim: "60",
+        _configFinishTime: "300",
+        _configTimeToClaim: "1800",
     },
     polygon: {
         _subscriptionId: "671",
@@ -38,7 +38,7 @@ export const chainConfigs: IIndexable = {
         _subscriptionId: "3262",
         _coordinatorId: "0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed",
         _keyHash: "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
-        _ticketPrice: "100000000000000000", // 0,1 ETHER
+        _ticketPrice: "10000000000000000", // 0,001 ETHER
         _minTicket: "5",
         _fee: "10", // 10%
         _configFinishTime: "60",
@@ -48,7 +48,7 @@ export const chainConfigs: IIndexable = {
         _subscriptionId: "3262",
         _coordinatorId: "0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed",
         _keyHash: "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
-        _ticketPrice: "100000000000000000", // 0,1 ETHER
+        _ticketPrice: "10000000000000000", // 0,001 ETHER
         _minTicket: "5",
         _fee: "10", // 10%
         _configFinishTime: "60",
