@@ -1,6 +1,6 @@
 import { H3, P } from "@/components/Heading";
 import Ticket from "@/components/Ticket";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { motion } from "framer-motion";
 import { useEthersStore } from "@/store/ethersStore";
@@ -15,6 +15,10 @@ const MyTickets = () => {
   const tickets = useEthersStore((state) => state.tickets);
   const currentWallet = useEthersStore((state) => state.currentWallet);
   const currentLottoInfo = useEthersStore((state) => state.currentLottoInfo);
+
+  useEffect(() => {
+    console.log(currentLottoInfo);
+  }, [currentLottoInfo]);
 
   return (
     <>

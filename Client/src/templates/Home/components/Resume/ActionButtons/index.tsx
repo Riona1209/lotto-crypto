@@ -19,7 +19,7 @@ const ActionButtons = ({}: ActionButtonsProps) => {
 
   return (
     <>
-      <Collapse in={!!error}>
+      {error && (
         <Alert
           severity="error"
           action={
@@ -38,7 +38,8 @@ const ActionButtons = ({}: ActionButtonsProps) => {
         >
           {error}
         </Alert>
-      </Collapse>
+      )}
+
       <S.ButtonsContainer>
         <Button
           onClick={buyTicket}
