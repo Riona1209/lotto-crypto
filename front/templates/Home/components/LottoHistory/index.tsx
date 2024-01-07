@@ -33,7 +33,7 @@ export const LottoHistory = () => {
 
         <div className="flex gap-4 flex-col">
           {lastRounds.map((round: any) => (
-            <RoundInfoCard key={round.key} round={round} />
+            <RoundInfoCard key={round.id} round={round} />
           ))}
         </div>
       </DialogContent>
