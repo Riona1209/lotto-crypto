@@ -69,6 +69,7 @@ export default function ContractProvider({ children }: any) {
       });
 
       const receipt = await tx.wait();
+      refresh();
     } catch (error: any) {
       handleError(error);
     }
