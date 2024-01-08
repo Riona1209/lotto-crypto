@@ -9,7 +9,8 @@ type ContractContextType = {
   lastLottery: any;
   lastRounds: any;
   claim: (loteryId: number | string) => Promise<void>;
-  currentStep?: "idle" | "waitAccept" | "waitTransition" | "finished";
+  currentStep: number;
+  currentTxInfo: any;
 };
 
 const ContractContext = createContext({} as ContractContextType);
@@ -22,9 +23,8 @@ export default function ContractProvider({ children }: any) {
   const [lastRounds, setLastRounds] = useState<any>([]);
   const refreshInterval = useRef<any>(null);
 
-  const [currentStep, setCurrentStep] = useState<
-    "idle" | "waitAccept" | "waitTransition" | "finished"
-  >("idle");
+  const [currentStep, setCurrentStep] = useState(0);
+  const [currentTxInfo, setCurrentTxInfo] = useState<any>(null);
 
   useEffect(() => {
     refreshInterval.current = setInterval(() => {
@@ -69,28 +69,32 @@ export default function ContractProvider({ children }: any) {
   };
 
   const buyTicket = async () => {
+    setCurrentTxInfo(null);
     try {
       const lottoContract = await getContract();
       const lastLottery = await getLastLottery();
       const lotteryPrice = await lastLottery.ticketPrice;
 
       console.log("abriu metamask");
-      setCurrentStep("waitAccept");
+      setCurrentStep(1);
 
       const tx = await lottoContract.buyTicket({
         value: lotteryPrice,
       });
 
-      setCurrentStep("waitTransition");
+      setCurrentTxInfo(tx);
+
+      setCurrentStep(2);
 
       const receipt = await tx.wait();
 
-      setCurrentStep("finished");
+      setCurrentStep(3);
 
       toast.success("Ticket bought successfully");
       refresh();
     } catch (error: any) {
       handleError(error);
+      throw new Error(error);
     }
   };
 
@@ -177,6 +181,8 @@ export default function ContractProvider({ children }: any) {
         lastLottery,
         lastRounds,
         claim,
+        currentStep,
+        currentTxInfo,
       }}
     >
       {children}

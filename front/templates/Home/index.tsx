@@ -42,6 +42,7 @@ import {
 
 import moment from "moment";
 import { LottoHistory } from "./components/LottoHistory";
+import { BuyTicketModal } from "./components/BuyTicketModal";
 
 export const Home = () => {
   const { connectMetaMask, address, accountData } = useAccount();
@@ -153,9 +154,7 @@ export const Home = () => {
           >
             {address ? "Connected!" : "Connect wallet"}
           </Button>
-          <Button disabled={address ? false : true} onClick={() => buyTicket()}>
-            Buy Ticket!
-          </Button>
+          <BuyTicketModal />
         </div>
       </div>
       <div className="flex flex-col items-center gap-2 justify-center">
